@@ -1,8 +1,11 @@
 services:
   - type: web
     name: profit-prediction-ml-project
-    env: python
+    runtime: python
     rootDir: flask-app
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
     plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13
