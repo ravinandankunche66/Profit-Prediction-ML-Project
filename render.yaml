@@ -2,10 +2,9 @@ services:
   - type: web
     name: profit-prediction-ml-project
     runtime: python
-    rootDir: flask-app
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: streamlit run app.py --server.address 0.0.0.0 --server.port $PORT
     plan: free
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10.13
+        value: 3.11.9
