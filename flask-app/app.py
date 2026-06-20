@@ -3,9 +3,12 @@ from flask import Flask, request, render_template
 import pickle
 import json
 import numpy as np
+from pathlib import Path
 
 
 app = Flask(__name__)
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "models"
 
 def predict_startup_profit(r_d_expenses, administration_expenses, marketing_expenses, state):
     """
@@ -21,11 +24,11 @@ def predict_startup_profit(r_d_expenses, administration_expenses, marketing_expe
     """
 
     # Load the Linear Regression model
-    with open('models/startp_profit_prediction_lr_model.pkl', 'rb') as f:
+    with open(MODEL_DIR / 'startp_profit_prediction_lr_model.pkl', 'rb') as f:
         model = pickle.load(f)
 
     # Load columns list saved as json file
-    with open("models/columns.json", "r") as f:
+    with open(MODEL_DIR / "columns.json", "r") as f:
         data_columns = json.load(f)['data_columns']
 
 
